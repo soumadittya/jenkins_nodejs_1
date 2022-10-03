@@ -38,7 +38,7 @@ pipeline{
                 echo "Deployment started ..."
                 sh 'ls -ltr'
                 sh 'pwd'
-                sh "sed -i 'soumadittya/nodeapp:$BUILD_ID' kubernetes.yaml"
+                sh " sed-i 'soumadittya/nodeapp:$BUILD_ID' kubernetes.yaml"
                 step([$class: 'KubernetesEngineBuilder', \
                   projectId: env.PROJECT_ID, \
                   clusterName: env.CLUSTER_NAME, \
