@@ -28,6 +28,6 @@ spec:
     spec:
       containers:
       - name: node-app
-        image: #path to your docker image
+        image: soumadittya/nodeapp:12
         ports:
         - containerPort: 8080
