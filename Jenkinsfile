@@ -4,6 +4,12 @@ pipeline{
 
 	environment {
 		DOCKERHUB_CREDENTIALS=credentials('jenkins_nodejs_1_docker_hub_key')
+        environment {
+        PROJECT_ID = 'subtle-melody-362608'
+                CLUSTER_NAME = 'jenkins-pipeline-cluster-1'
+                LOCATION = 'us-central1-c'
+                CREDENTIALS_ID = 'gke-1'
+    }
 	}
 
 	stages {
@@ -11,7 +17,7 @@ pipeline{
 		stage('Build') {
 
 			steps {
-				sh 'docker build -t soumadittya/nodeapp:latest .'
+				sh 'docker build -t soumadittya/nodeapp:$BUILD_ID .'
 			}
 		}
 
@@ -25,7 +31,7 @@ pipeline{
 		stage('Push') {
 
 			steps {
-				sh 'docker push soumadittya/nodeapp:latest'
+				sh 'docker push soumadittya/nodeapp:$BUILD_ID'
 			}
 		}
 	}
