@@ -12,6 +12,14 @@ pipeline{
 
 	stages {
 
+        stage('kubernetes-file-modification') {
+
+			steps {
+				sh 'sed "s/nodeapp:[^ ]/nodeapp:$BUILD_ID" kubernetes.yaml > temp.yaml'
+                sh 'cp temp.yaml kubernetes.yaml'
+			}
+		}
+
 		stage('Build') {
 
 			steps {
@@ -38,8 +46,6 @@ pipeline{
                 echo "Deployment started ..."
                 sh 'ls -ltr'
                 sh 'pwd'
-                sh 'sed "s/nodeapp:[^ ]/nodeapp:$BUILD_ID" kubernetes.yaml > temp.yaml'
-                sh 'cp temp.yaml kubernetes.yaml'
                 step([$class: 'KubernetesEngineBuilder', \
                   projectId: env.PROJECT_ID, \
                   clusterName: env.CLUSTER_NAME, \
