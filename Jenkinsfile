@@ -15,7 +15,7 @@ pipeline{
         stage('kubernetes-file-modification') {
 
 			steps {
-				sh 'sed "s/nodeapp:[^ ]/nodeapp:$BUILD_ID" kubernetes.yaml > temp.yaml'
+				sh 'sed "s/nodeapp:[^ ]/nodeapp:$BUILD_ID/g" kubernetes.yaml > temp.yaml'
                 sh 'cp temp.yaml kubernetes.yaml'
 			}
 		}
